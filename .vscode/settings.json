@@ -1,0 +1,9 @@
+{
+    "grammarly.selectors": [
+        {
+            "language": "typescript",
+            "scheme": "file",
+            "pattern": "src/snippets/1-design-api.ts"
+        }
+    ]
+}
