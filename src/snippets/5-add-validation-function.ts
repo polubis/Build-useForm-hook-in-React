@@ -1,10 +1,10 @@
 import { Fns, Values, ValidationResult, Errors } from "./3-add-type-defs";
 
-// Function which allows you to run validation for values object
+// This function validates :)
 export const validate = <V extends Values>(
-  keys: (keyof V)[], // Initially calculated keys
-  values: V, // Current values
-  fns: Fns<V> // Validation object
+  keys: (keyof V)[],
+  values: V,
+  fns: Fns<V>
 ): ValidationResult<V> => {
   let invalid = false,
     invalidCount = 0,
@@ -19,7 +19,7 @@ export const validate = <V extends Values>(
 
     for (let j = 0; j < safeFns.length; j++) {
       const fn = safeFns[j];
-      // Run validator method and pass current value with other values
+      // Here you run validator and inject values
       const error = fn(value, values);
 
       if (error !== "") {
@@ -39,6 +39,6 @@ export const validate = <V extends Values>(
     valid: !invalid,
     validCount,
     progress: +((validCount / keys.length) * 100).toFixed(2),
-    invalidCount,
+    invalidCount
   };
 };
