@@ -7,10 +7,8 @@ const createMetadata = (touched: boolean, confirmed: boolean): Metadata => ({
   touched,
   untouched: !touched,
   confirmed,
-  unconfirmed: !confirmed,
+  unconfirmed: !confirmed
 });
-
-const isDebugAvailable = (): boolean => /localhost/.test(window.location.href);
 
 export const useForm = <V extends Values>(initValues: V, fns: Fns<V> = {}) => {
   const [, setCounter] = useState(0);
@@ -32,7 +30,7 @@ export const useForm = <V extends Values>(initValues: V, fns: Fns<V> = {}) => {
   const set = <K extends keyof V>(key: K, value: V[K]): void => {
     values.current = {
       ...values.current,
-      [key]: value,
+      [key]: value
     };
     result.current = validate(keys, values.current, fns);
     metadata.current = createMetadata(true, metadata.current.confirmed);
@@ -44,11 +42,6 @@ export const useForm = <V extends Values>(initValues: V, fns: Fns<V> = {}) => {
   const change = (e: ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;
     const key = e.target.name;
-
-    if (!isDebugAvailable()) {
-      set(key, value as V[keyof V]);
-      return;
-    }
 
     if (!key) {
       console.error("Lack of name property in input element");
@@ -108,6 +101,6 @@ export const useForm = <V extends Values>(initValues: V, fns: Fns<V> = {}) => {
     submit,
     change,
     on,
-    reset,
+    reset
   } as Form<V>;
 };

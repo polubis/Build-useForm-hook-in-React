@@ -6,7 +6,7 @@ import { useForm } from "./useForm";
 
 describe("useForm()", () => {
   describe("after mount", () => {
-    it("returns keys from values", () => {
+    it("returns keys generated from values", () => {
       const VALUES = { username: "" };
       const { result } = renderHook(() => useForm(VALUES));
 
@@ -25,7 +25,7 @@ describe("useForm()", () => {
       const VALUES = { username: "" };
       const { result } = renderHook(() =>
         useForm(VALUES, {
-          username: [(value) => (value === "" ? MESSAGE : "")],
+          username: [(value) => (value === "" ? MESSAGE : "")]
         })
       );
 
@@ -61,7 +61,7 @@ describe("useForm()", () => {
 
       expect(spy).toHaveBeenCalledWith(USERNAME, {
         username: USERNAME,
-        password: "",
+        password: ""
       });
     });
   });
@@ -78,7 +78,7 @@ describe("useForm()", () => {
 
       expect(result.current.values).toEqual({
         username: USERNAME,
-        password: "",
+        password: ""
       });
     });
 
@@ -87,7 +87,7 @@ describe("useForm()", () => {
       const VALUES = { username: "user1994", password: "" };
       const { result } = renderHook(() =>
         useForm(VALUES, {
-          username: [(value) => (value === "" ? MESSAGE : "")],
+          username: [(value) => (value === "" ? MESSAGE : "")]
         })
       );
 
@@ -102,7 +102,7 @@ describe("useForm()", () => {
       expect(result.current.invalidCount).toBe(1);
       expect(result.current.errors).toEqual({
         username: MESSAGE,
-        password: "",
+        password: ""
       });
     });
 
@@ -127,7 +127,7 @@ describe("useForm()", () => {
       const VALUES = { username: "user1994", password: "" };
       const { result } = renderHook(() =>
         useForm(VALUES, {
-          username: [(value) => (value === "" ? MESSAGE : "")],
+          username: [(value) => (value === "" ? MESSAGE : "")]
         })
       );
 
@@ -143,7 +143,7 @@ describe("useForm()", () => {
       expect(result.current.invalidCount).toBe(1);
       expect(result.current.errors).toEqual({
         username: MESSAGE,
-        password: "",
+        password: ""
       });
     });
 
@@ -166,7 +166,7 @@ describe("useForm()", () => {
       const VALUES = { username: "user1994", password: "" };
       const { result } = renderHook(() =>
         useForm(VALUES, {
-          username: [(value) => (value === "" ? MESSAGE : "")],
+          username: [(value) => (value === "" ? MESSAGE : "")]
         })
       );
 
@@ -182,7 +182,7 @@ describe("useForm()", () => {
       expect(result.current.invalidCount).toBe(1);
       expect(result.current.errors).toEqual({
         username: MESSAGE,
-        password: "",
+        password: ""
       });
     });
 
@@ -219,13 +219,13 @@ describe("useForm()", () => {
 
       act(() => {
         result.current.change({
-          target: { value: USERNAME, name: "username" },
+          target: { value: USERNAME, name: "username" }
         } as ChangeEvent<HTMLInputElement>);
       });
 
       expect(result.current.values).toEqual({
         username: USERNAME,
-        password: "",
+        password: ""
       });
     });
 
@@ -234,13 +234,13 @@ describe("useForm()", () => {
       const VALUES = { username: "user1994", password: "" };
       const { result } = renderHook(() =>
         useForm(VALUES, {
-          username: [(value) => (value === "" ? MESSAGE : "")],
+          username: [(value) => (value === "" ? MESSAGE : "")]
         })
       );
 
       act(() => {
         result.current.change({
-          target: { value: "", name: "username" },
+          target: { value: "", name: "username" }
         } as ChangeEvent<HTMLInputElement>);
       });
 
@@ -251,7 +251,7 @@ describe("useForm()", () => {
       expect(result.current.invalidCount).toBe(1);
       expect(result.current.errors).toEqual({
         username: MESSAGE,
-        password: "",
+        password: ""
       });
     });
 
@@ -261,7 +261,7 @@ describe("useForm()", () => {
 
       act(() => {
         result.current.change({
-          target: { value: "d", name: "username" },
+          target: { value: "d", name: "username" }
         } as ChangeEvent<HTMLInputElement>);
       });
 
@@ -284,7 +284,6 @@ describe("useForm()", () => {
         });
 
         expect(console.error).toHaveBeenCalledWith(message);
-        expect(console.error).toHaveBeenCalledTimes(1);
         expect(result.current.values.username).toBe("");
       };
 
@@ -298,15 +297,15 @@ describe("useForm()", () => {
 
       it("logs an error when lack of name property", () => {
         testChangeWithError("Lack of name property in input element", {
-          target: { value: "test" },
+          target: { value: "test" }
         } as ChangeEvent<HTMLInputElement>);
       });
 
-      it("logs an error with property is different than declared on init", () => {
+      it("logs an error when property is different than declared on init", () => {
         testChangeWithError(
           "Unsupported property used as name attribute in input element",
           {
-            target: { value: "test", name: "other" },
+            target: { value: "test", name: "other" }
           } as ChangeEvent<HTMLInputElement>
         );
       });
@@ -315,7 +314,7 @@ describe("useForm()", () => {
         testChangeWithError(
           "Unsupported change detected. You trying to change non string property with string value",
           {
-            target: { value: 5 as any, name: "username" },
+            target: { value: 5 as any, name: "username" }
           } as ChangeEvent<HTMLInputElement>
         );
       });
@@ -327,7 +326,7 @@ describe("useForm()", () => {
       const VALUES = { username: "", password: "" };
       const { result } = renderHook(() =>
         useForm(VALUES, {
-          username: [(value) => (value === "jacob1994" ? "Invalid" : "")],
+          username: [(value) => (value === "jacob1994" ? "Invalid" : "")]
         })
       );
 
@@ -349,7 +348,7 @@ describe("useForm()", () => {
   describe("on()", () => {
     let sub: Subscription;
 
-    it("allows to listen for dedicated properties change", () => {
+    it("allows to listen for properties change", () => {
       const VALUES = { username: "", password: "" };
       const { result } = renderHook(() => useForm(VALUES));
 
@@ -368,22 +367,22 @@ describe("useForm()", () => {
       // eslint-disable-next-line testing-library/no-wait-for-multiple-assertions
       expect(fn).toHaveBeenCalledWith({
         key: "username",
-        value: "jacob",
+        value: "jacob"
       });
       // eslint-disable-next-line testing-library/no-wait-for-multiple-assertions
       expect(fn).toHaveBeenCalledWith({
         key: "username",
-        value: "jaco",
+        value: "jaco"
       });
       // eslint-disable-next-line testing-library/no-wait-for-multiple-assertions
       expect(fn).toHaveBeenCalledWith({
         key: "username",
-        value: "jac",
+        value: "jac"
       });
       // eslint-disable-next-line testing-library/no-wait-for-multiple-assertions
       expect(fn).not.toHaveBeenCalledWith({
         key: "password",
-        value: "jac",
+        value: "jac"
       });
     });
 

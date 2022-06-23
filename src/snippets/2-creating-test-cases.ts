@@ -34,7 +34,7 @@ describe("useForm()", () => {
 
     describe("skips update and", () => {
       it("logs an error when lack of name property", () => {});
-      it("logs an error with property is different than declared on init", () => {});
+      it("logs an error when property is different than declared on init", () => {});
       it("logs an error when runtime types differs", () => {});
     });
   });
@@ -44,6 +44,6 @@ describe("useForm()", () => {
   });
 
   describe("on()", () => {
-    it("allows to listen for dedicated properties change", () => {});
+    it("allows to listen for properties change", () => {});
   });
 });
