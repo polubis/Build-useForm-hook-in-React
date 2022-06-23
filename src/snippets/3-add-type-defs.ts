@@ -51,4 +51,4 @@ export type Form<V extends Values> = Metadata &
   FormHandlers<V> & {
     keys: (keyof V)[];
     values: V;
-  }; // Whole form object returned which will be returned by useForm hook
+  }; // It will be returned by useForm
