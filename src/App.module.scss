@@ -9,9 +9,9 @@
   margin: auto;
 
   .tabs {
-    position: fixed;
-    left: 15px;
-    top: 15px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 64px;
     width: 500px;
   }
 }
