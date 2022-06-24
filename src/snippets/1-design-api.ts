@@ -1,6 +1,6 @@
 const ExampleComponent = () => {
   // As the first argument, we passing initial values
-  // As second argument validation config
+  // As second argument, we passing validation config
   const form = useForm(
     { username: "", password: "" },
     { username: [(value) => (value === "" ? "This field is required" : "")] }
@@ -27,9 +27,9 @@ const ExampleComponent = () => {
   form.reset(); // Resets state to initial
 
   form.confirm(); // Runs validation for the whole form
-  form.submit({ preventDefault: () => {} }); // Same as above but in addition calls preventDefault()
+  form.submit({ preventDefault: () => {} }); // Same as above but in addition calls preventDefault
 
   const sub = form.on("username").subscribe(({ key, value }) => {
-    // Allows to perform side effects on dedicated field change
+    // Allows to perform side effects on specific field change
   });
 };
