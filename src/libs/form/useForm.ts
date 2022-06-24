@@ -57,7 +57,7 @@ export const useForm = <V extends Values>(initValues: V, fns: Fns<V> = {}) => {
 
     if (typeof values.current[key] !== typeof value) {
       console.error(
-        "Unsupported change detected. You trying to change non string property with string value"
+        "Unsupported change detected. Are you trying to change non-string property with a string value?"
       );
       return;
     }
