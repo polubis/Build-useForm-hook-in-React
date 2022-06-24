@@ -7,14 +7,14 @@ const ExampleComponent = () => {
   );
 
   form.keys; // Returns ['username', 'password']
-  form.values; // An Object which contains values
+  form.values; // An object which contains values
 
   form.invalid; // Determines is form invalid
   form.valid; // Negation of invalid
   form.progress; // Progress in percentage
   form.validCount; // Count of valid fields
   form.invalidCount; // Count of invalid fields
-  form.errors; // An Object which contains errors or empty strings
+  form.errors; // An object which contains errors or empty strings
 
   form.touched; // Indicates if any value in the form changed
   form.untouched; // Negation of touched
