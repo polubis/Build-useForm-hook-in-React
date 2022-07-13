@@ -272,21 +272,6 @@ describe("useForm()", () => {
     });
 
     describe("skips update and", () => {
-      const testChangeWithError = (
-        message: string,
-        event: ChangeEvent<HTMLInputElement>
-      ): void => {
-        const VALUES = { username: "" };
-        const { result } = renderHook(() => useForm(VALUES));
-
-        act(() => {
-          result.current.change(event);
-        });
-
-        expect(console.error).toHaveBeenCalledWith(message);
-        expect(result.current.values.username).toBe("");
-      };
-
       beforeEach(() => {
         jest.spyOn(console, "error").mockImplementation(() => {});
       });
@@ -296,27 +281,51 @@ describe("useForm()", () => {
       });
 
       it("logs an error when lack of name property", () => {
-        testChangeWithError("Lack of name property in input element", {
-          target: { value: "test" }
-        } as ChangeEvent<HTMLInputElement>);
+        const VALUES = { username: "" };
+        const { result } = renderHook(() => useForm(VALUES));
+
+        act(() => {
+          result.current.change({ target: { value: "test" } } as ChangeEvent<
+            HTMLInputElement
+          >);
+        });
+
+        expect(console.error).toHaveBeenCalledWith(
+          "Lack of name property in input element"
+        );
+        expect(result.current.values.username).toBe("");
       });
 
       it("logs an error when property is different than declared on init", () => {
-        testChangeWithError(
-          "Unsupported property used as name attribute in input element",
-          {
+        const VALUES = { username: "" };
+        const { result } = renderHook(() => useForm(VALUES));
+
+        act(() => {
+          result.current.change({
             target: { value: "test", name: "other" }
-          } as ChangeEvent<HTMLInputElement>
+          } as ChangeEvent<HTMLInputElement>);
+        });
+
+        expect(console.error).toHaveBeenCalledWith(
+          "Unsupported property used as name attribute in input element"
         );
+        expect(result.current.values.username).toBe("");
       });
 
       it("logs an error when runtime types differs", () => {
-        testChangeWithError(
-          "Unsupported change detected. You trying to change non string property with string value",
-          {
+        const VALUES = { username: "" };
+        const { result } = renderHook(() => useForm(VALUES));
+
+        act(() => {
+          result.current.change({
             target: { value: 5 as any, name: "username" }
-          } as ChangeEvent<HTMLInputElement>
+          } as ChangeEvent<HTMLInputElement>);
+        });
+
+        expect(console.error).toHaveBeenCalledWith(
+          "Unsupported change detected. Are you trying to change non-string property with a string value?"
         );
+        expect(result.current.values.username).toBe("");
       });
     });
   });
